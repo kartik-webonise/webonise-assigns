@@ -1,0 +1,51 @@
+1. Host name of the system
+ echo "[$HOSTNAME]"
+
+2. Type and version of the OS
+ uname -o
+ uname -v
+
+3. Full path to home directory
+ pwd
+
+4. Which other users are logged on
+ who
+ w
+
+5. What groups you belong to
+ groups
+
+6. What files, folders are located in directory
+ ls
+
+
+7. Renaming all files with extension .txt
+   for file in $(ls *.txt)
+do
+mv $file xy$file
+done
+
+8. Rename files which start with x     
+ for file in $(ls x*)
+do
+mv $file yx$file
+done
+
+9. Storing all the files in assignment.log with date and time   
+ls >> assignment.log
+date >> assignment.log
+
+10.Create a folder named "public_html" in your assignment directory. Place a 'readme.txt' file in there.Set up file permissions to 777 so that you can see the directory listing.
+  mkdir public_html
+ cd public_html
+  touch readme.txt
+  chnod -R 777 readme.txt
+
+11. Move first 4 files from assignment folder to public_html folder.
+var=$(cd /home/webonise-assignment/ | ls -R   | head -4)
+for file in $var;
+do
+mv $file /home/webonise-assignment/public_html/
+done
+echo $var
+
