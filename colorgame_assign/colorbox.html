@@ -1,0 +1,150 @@
+<html>
+
+<style>
+.foo {
+   float: left;
+   width: 40px;
+   height: 40px;
+   margin: 5px 5px 5px 5px;
+   border-width: 5px;
+   border-style: solid;
+   background-color:#eee
+
+}
+.foo1 {
+   float: center;
+   width: 70px;
+   height: 30px;
+   margin: 3px 3px 3px 3px;
+   border-width: 5px;
+   border-style: solid;
+   background-color:#eea
+
+}
+.green {
+   background-color:green;
+}
+.red {
+   background-color:red;
+}
+.blue {
+   background-color:blue;
+}
+.div {
+   background-color:#ccc;
+}
+.hv{
+	border:2px dotted black;
+}
+.div1 {
+   background-color:#eee;
+}
+</style>
+
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+	$(document).ready(function(){
+		//var temp=$("#division").clone();
+		$("button").click(function(){
+
+			
+		//$("input[name='color']").on("click",function(){
+			
+			
+				var color=$("input[name='color']:checked").val();
+				//alert(color);
+				if(color=="red")
+				{
+					if($(this).hasClass("red") || $(this).hasClass("green") || $(this).hasClass("blue"))
+					{
+						alert("Box is already colored")
+					}
+					else
+						$(this).addClass("red");
+				}
+				else if(color=="green")
+				{
+					if($(this).hasClass("red") || $(this).hasClass("green") || $(this).hasClass("blue"))
+					{
+						alert("Box is already colored")
+					}
+					else
+						$(this).addClass("green");
+				}
+				else if(color=="blue")
+				{
+					if($(this).hasClass("red") || $(this).hasClass("green") || $(this).hasClass("blue"))
+					{
+						alert("Box is already colored")
+					}
+					else
+						$(this).addClass("blue");
+				}
+				else{
+					alert("Choose a color ");
+				}
+				
+				
+			});
+			
+			$("button").hover(function(){$(this).addClass("hv");},function(){$(this).removeClass("hv");});
+
+		
+			$("#res").click(function(){
+					location.reload();
+			});
+
+			$("#shuf").click(function(){
+				$("#1").before($("#7"));
+				$("#2").before($("#9"));
+				$("#6").before($("#4"));
+				$("#3").before($("#8"));
+				$("#1").before($("#8"));
+				$("#3").before($("#6"));
+				$("#2").before($("#5"));
+	
+			});	
+
+
+//});
+	
+});
+
+</script>
+</head>
+
+
+
+<body>
+<center><br><br><br><br><br><br>
+<input type="radio" id="r" name="color" value="red">red
+    <input type="radio"  name="color" value="green">green
+   <input type="radio" name="color" value="blue">blue<br><br>
+</center>
+  <center>
+<div id="division" class="div" style="height:220px;width:150px;float:center" >      
+<br><br><button name="number" id="1" class="foo" > 1 </button>
+<button name="number" id="2" class="foo" > 2 </button>
+<button name="number" id="3" class="foo" > 3 </button><br><br><br>
+<button name="number" id="4" class="foo" > 4 </button>
+<button name="number" id="5" class="foo" > 5 </button>
+<button name="number" id="6" class="foo" > 6 </button><br><br><br>
+<button name="number" id="7" class="foo" > 7 </button>
+<button name="number" id="8" class="foo" > 8 </button>
+<button name="number" id="9" class="foo" > 9 </button>
+</div>
+</center>
+
+<center>
+<br>
+<input type="submit" value="reset" id="res"  >
+<input type="submit" value="shuffle" name="shuffle" id="shuf"  > 
+</center>
+
+
+
+</body>
+</html>
