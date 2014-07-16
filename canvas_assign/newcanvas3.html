@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+  <canvas id="myCanvas" width="600" height="600" style="border:3px solid #000000"></canvas>
+  <body>
+		<br>Enter line Equation in form "ax+by=c": <input type="text" name="equation" id="equation" ><br> 
+		Enter Starting point : <input type="text" name="start" id="start"><br>
+		Enter Ending point : <input type="text" name="end" id="end"><br>
+		Enter Step unit : <input type="text" name="step" id="step"><br>
+  		<button onclick="get_eqn()">Draw line</button>
+  		<p>Note: 20px = 1 unit</p>
+    <script>
+//document.write("gazs");
+
+var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+	context.translate(canvas.width/2,canvas.height/2); // translate origin to center of canvas
+	context.scale(1,-1);		//invert the quadrants
+	
+	context.beginPath();		
+	context.moveTo(0,0);
+	context.lineTo(300,0);
+	context.stroke();
+	
+	context.beginPath();	
+	context.moveTo(0,0);
+	context.lineTo(0,300);
+	context.stroke();
+	
+	context.beginPath();	
+	context.moveTo(0,0);
+	context.lineTo(-300,0);
+	context.stroke();
+	
+	context.beginPath();	
+	context.moveTo(0,0);
+	context.lineTo(0,-300);
+	context.stroke();	
+	
+	context.font='bold 15px Arial';
+	context.fillText("(0,0)",0,0);
+	
+	//alert("gsgsg");
+	
+	for(var i=0;i<canvas.width/2;i+=20)   // setting scale where 20px= 1 unit
+	{
+		context.beginPath();	
+		context.moveTo(i,0);
+		context.lineTo(i,300);
+		context.stroke();
+		context.beginPath();	
+		context.moveTo(i,0);
+		context.lineTo(i,-300);
+		context.stroke();
+		context.beginPath();	
+		context.moveTo(-i,0);
+		context.lineTo(-i,300);
+		context.stroke();
+		context.beginPath();	
+		context.moveTo(-i,0);
+		context.lineTo(-i,-300);
+		context.stroke();
+	}
+	
+	for(var i=0;i<canvas.height/2;i+=20)			// setting scale where 20px= 1 unit
+	{
+		context.beginPath();	
+		context.moveTo(0,i);
+		context.lineTo(300,i);
+		context.stroke();
+		context.beginPath();	
+		context.moveTo(0,i);
+		context.lineTo(-300,i);
+		context.stroke();
+		context.beginPath();	
+		context.moveTo(0,-i);
+		context.lineTo(300,-i);
+		context.stroke();
+		context.beginPath();	
+		context.moveTo(0,-i);
+		context.lineTo(-300,-i);
+		context.stroke();
+		
+	}
+	
+	//get_eqn();
+	function get_eqn()				// get equation from user
+	{
+		var eqn=document.getElementById("equation").value;	
+		//alert(eqn);
+		parse(eqn);
+	}
+		
+	function parse(eqn)				//seperate x-coefficient, y-coefficient and constant from the user equation
+	{
+		var xcoff=0,ycoff=0,cnst=0,x1,y1,xn=0,yn,s,temp,f;
+		var i=0;
+		while(eqn[i]!='x')
+		{
+			xcoff=xcoff*10+parseInt(eqn[i]);			//x-coff is x-coefficient
+			i++;
+		}
+		i++;
+		i++;
+		//document.write(xcoff);
+		//alert(xcoff);
+		while(eqn[i]!='y')
+		{
+			ycoff=ycoff*10+parseInt(eqn[i]);				//y-coff is y-coefficient
+			i++;
+		}
+		//alert(ycoff);
+		i++;
+		i++;
+		//document.write(eqn.length);
+		while(i<(eqn.length))
+		{
+			cnst=cnst*10+parseInt(eqn[i]);			//cnst is the constant
+			i++;
+		}
+		//alert(cnst);
+		
+		x1=document.getElementById("start").value;	//get the start point in x1
+		x1=parseInt(x1);
+		y1= [cnst-(xcoff*x1)]/ycoff;						//(x1,y1) is the start point co-ordinate
+		//alert(y1);
+		
+	
+		x2=document.getElementById("end").value;		//get the end point in x2
+		x2=parseInt(x2);
+		y2=[cnst-(xcoff*x2)]/ycoff;						//(x2,y2) is the end point co-ordinate
+		//alert(y2);
+		f=20;
+		context.beginPath();									
+		context.moveTo(x1*f,y1*f);						//draw the line usung start point and endpoint co-ordinates
+		context.lineTo(x2*f,y2*f);
+		context.strokeStyle='#ff0000';
+		context.lineWidth = 3;
+		context.stroke();
+
+		
+		step=document.getElementById("step").value;			//get the step value
+		step=parseInt(step);
+		//alert(step);
+		s=0;
+		
+		while(xn<x2)								//loop to calculate the intermediate points using step value
+		{
+			s=step+s;
+			xn=x1+s;
+			yn=[cnst-(xcoff*xn)]/ycoff;	
+				context.font='bold 17px Arial';
+				
+			context.fillText("#",xn*f,yn*f);					//'#' is used to denote the step intermediate co-ordinates on line
+			//context.fillText((xn,yn),(xn*f),(yn*f));
+		}
+		
+	}
+	
+
+</script>
+  </head>
+  </body>
+
+</html>
