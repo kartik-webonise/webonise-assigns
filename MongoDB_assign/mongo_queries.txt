@@ -1,0 +1,102 @@
+﻿MONGODB Commands:
+
+To create collection
+> db.createCollection("users"); 
+{ "ok" : 1 } 
+> 
+
+Show collections
+> show collections; 
+system.indexes 
+users 
+> 
+
+Insert documents
+> db.users.insert({name:'abc',id:'1',age:'22'}); 
+WriteResult({ "nInserted" : 1 }) 
+
+Insert Multiple documents
+> db.users.insert([{name:'pqr',id:2,age:20},{name:'xyz',id:3,age:21}]); 
+BulkWriteResult({ 
+	"writeErrors" : [ ], 
+	"writeConcernErrors" : [ ], 
+	"nInserted" : 2, 
+	"nUpserted" : 0, 
+	"nMatched" : 0, 
+	"nModified" : 0, 
+	"nRemoved" : 0, 
+	"upserted" : [ ] 
+}) 
+> 
+
+Display 
+> db.users.find(); 
+{ "_id" : ObjectId("53be418c737c655216b64846"), "name" : "abc", "id" : "1", "age" : "22" } 
+{ "_id" : ObjectId("53be42cc89ec787fbcbfdca7"), "name" : "pqr", "id" : 2, "age" : 20 } 
+{ "_id" : ObjectId("53be42cc89ec787fbcbfdca8"), "name" : "xyz", "id" : 3, "age" : 21 } 
+> 
+
+
+Display specific with format
+> db.users.find({"id":{$gt:1}}).pretty(); 
+{ 
+	"_id" : ObjectId("53be42cc89ec787fbcbfdca7"), 
+	"name" : "pqr", 
+	"id" : 2, 
+	"age" : 20 
+} 
+{ 
+	"_id" : ObjectId("53be42cc89ec787fbcbfdca8"), 
+	"name" : "xyz", 
+	"id" : 3, 
+	"age" : 21 
+} 
+> 
+
+
+.
+
+
+> db.users.find({"id":{$gt:1},"name":"xyz"}).pretty(); 
+{ 
+	"_id" : ObjectId("53be42cc89ec787fbcbfdca8"), 
+	"name" : "xyz", 
+	"id" : 3, 
+	"age" : 21 
+} 
+> 
+
+
+Create assessment -> questions in assignment -> options for each question
+
+db.assess.insert({ 
+... ... assess_id:1, 
+... ... type:'maths', 
+... ... questions:[{ 
+...                  que_id:1, 
+...                  que:'1+2', 
+...                  options:[
+...                            {opt1:1},{opt2:2},{opt3:3},{opt4:4}]}, 
+...                  { 
+... ...                  que_id:2, 
+... ...                  que:'2+3', 
+... ...                  options:[
+... ...                            {opt1:11},{opt2:12},{opt3:13},{opt4:5}]} 
+... ]}) 
+
+
+Update the que_id
+ db.assess.update({assess_id:1,'questions.que_id':1},{$set:{'questions.$.que_id':5}}) 
+
+Update the option of a specific question 
+db.assess.update({ "assess_id" : 1}, {$set: {"questions.1.options.2.opt3": "20"}}) 
+
+Delete a specific option:
+a) Sets the specific option to null
+db.assess.update({ "asses_id" : 1}, {$unset: {"question.1.options.1": 1}}) 
+
+b) Removes the NULL entry
+db.assess.update({ "asses_id" : 1}, {$pull: {"question.1.options": null}})
+
+
+

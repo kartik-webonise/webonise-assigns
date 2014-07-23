@@ -1,0 +1,11 @@
+﻿MongoDB
+It is a non-relational database and the most popular NO sql database.
+Unlike a relational database which involves tables, its rows and columns, and relationships between tables , mongoDB is designed related to a concept of documents.
+In document oriented databases, the documents are encoded in some standard format or encoding.
+mongoDB uses BSON style of encoding which is nothing but binary version of JSON.
+BSON documents consist of an ordered list of elements. Each element consists of a field, type and its value.
+<key,value> or <attribute,value> is the general way of representation of data in mongoDB.
+A major advantage of using this type is that it will allow the database to be open-ended i.e., it can be extended without modifying existing code or data.
+NoSQL databases lack ACID properties and are rather based on BASE properties.
+mongoDB was built in C++.
+

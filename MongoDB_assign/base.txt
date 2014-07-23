@@ -1,0 +1,18 @@
+﻿BASE properties of database
+Unlike relational databases, which are based on ACID properties, NoSQL databases are based on BASE properties.
+BASE stands for Basically available, Soft state and  Eventual consistency.
+The Brewer’s theorem or the CAP theorem states that it is impossible for a distributed computer system to provide all three of the following guarantees:
+Consistency which states that all the nodes in the distributed system can see same data at same time.
+Availability which states that every request receives a response whether successful or failed.
+Partial tolerance which states that a failure of a part of system does not affect the whole system.
+Now BASE sacrifices the consistency principle in CAP, rather it says the system is eventually consistent i.e., the system will become consistent over time, given that the system does not receive any input over that time.
+Need for BASE ?
+With the data becoming abundant day by day the and with the introduction on non-relational databases constraints of CAP for NoSQL databases were coming into picture. 
+So availability and partition were the principles which were abided and consisntency took a hit w.r.t to NoSQL databases.
+There BASE properties were something which were introduced and attached to NoSQL.
+Basically Available: It states that system does not guarantee availability in terms of CAP theorem i.e., the response could still be a failure to obtain the requested data.
+It supports partial failure i.e., user database failure impacts only 20pc of the users. Thus it ensures not full but basic availability.
+Soft State: It states that even without any request of response in the system, in an idle system, the state of the system could change over time. Thus the state of the system is not rigid and is susceptible to change.
+Eventual Consistency: It states that for a time when system does not get any input, the system will become eventually consistent. 
+It is form of weak consistency, which means if no new updates are made to an object, all the access will return the last updated value. DNS (Domain name system) is the most popular syatem which uses eventual consistency.
+
